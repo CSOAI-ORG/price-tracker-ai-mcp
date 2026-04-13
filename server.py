@@ -36,12 +36,12 @@ async def handle_list_tools() -> list[Tool]:
 async def handle_call_tool(name: str, arguments: Any | None) -> list[types.TextContent | types.ImageContent | types.EmbeddedResource]:
     args = arguments or {}
     if name == "track_price":
-            old = _store.get(args["product"], {}).get("price", float("inf"))
-            _store[args["product"]] = {"price": args["price"], "date": datetime.now().isoformat()}
-            alert = args["price"] < old
-            return [TextContent(type="text", text=json.dumps({"alert": alert, "old_price": old if old != float("inf") else None}, indent=2))]
-        if name == "get_alerts":
-            return [TextContent(type="text", text=json.dumps({"tracked": list(_store.keys())}, indent=2))]
+        old = _store.get(args["product"], {}).get("price", float("inf"))
+        _store[args["product"]] = {"price": args["price"], "date": datetime.now().isoformat()}
+        alert = args["price"] < old
+        return [TextContent(type="text", text=json.dumps({"alert": alert, "old_price": old if old != float("inf") else None}, indent=2))]
+    if name == "get_alerts":
+        return [TextContent(type="text", text=json.dumps({"tracked": list(_store.keys())}, indent=2))]
     return [TextContent(type="text", text=json.dumps({"error": "Unknown tool"}, indent=2))]
 
 async def main():
