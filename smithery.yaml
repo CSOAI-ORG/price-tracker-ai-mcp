@@ -1,0 +1,10 @@
+name: price-tracker-ai-mcp
+description: "MEOK AI Labs — Price Tracker tools for AI agents and LLMs"
+vendor: MEOK AI Labs
+homepage: https://meok.ai
+repository: https://github.com/CSOAI-ORG/price-tracker-ai-mcp
+license: MIT
+categories: [E-Commerce, Finance]
+tags: [price-tracking, price-monitoring, price-comparison, deal-finder, price-alert]
+runtime: python
+entrypoint: server.py
