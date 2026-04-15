@@ -1,4 +1,10 @@
 name: price-tracker-ai-mcp
 description: MEOK AI Labs MCP Server
 version: 1.0.0
-tools: []
+tools:
+- name: track_price
+  description: Track a product price
+  parameters: []
+- name: get_alerts
+  description: Get price drop alerts
+  parameters: []
