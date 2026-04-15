@@ -3,11 +3,14 @@
 import sys, os
 sys.path.insert(0, os.path.expanduser('~/clawd/meok-labs-engine/shared'))
 from auth_middleware import check_access
+from persistence import ServerStore
 
 import json
 from datetime import datetime, timezone
 from collections import defaultdict
 from mcp.server.fastmcp import FastMCP
+
+_store = ServerStore("price-tracker-ai")
 
 FREE_DAILY_LIMIT = 15
 _usage = defaultdict(list)
@@ -16,10 +19,6 @@ def _rl(c="anon"):
     _usage[c] = [t for t in _usage[c] if (now-t).total_seconds() < 86400]
     if len(_usage[c]) >= FREE_DAILY_LIMIT: return json.dumps({"error": f"Limit {FREE_DAILY_LIMIT}/day"})
     _usage[c].append(now); return None
-
-# In-memory stores
-_price_history: dict[str, list[dict]] = defaultdict(list)  # product -> [{price, date, retailer}]
-_alerts: list[dict] = []
 
 mcp = FastMCP("price-tracker-ai", instructions="Track product prices over time, set price drop alerts, and compare across retailers. By MEOK AI Labs.")
 
@@ -34,7 +33,7 @@ def track_price(product: str, price: float, retailer: str = "unknown", currency:
     if price < 0:
         return json.dumps({"error": "Price cannot be negative"})
     product_key = product.lower().strip()
-    history = _price_history[product_key]
+    history = _store.list(f"prices:{product_key}")
     entry = {
         "price": round(price, 2),
         "retailer": retailer,
@@ -50,10 +49,12 @@ def track_price(product: str, price: float, retailer: str = "unknown", currency:
         if previous_price > 0:
             change_pct = round((price - previous_price) / previous_price * 100, 2)
         price_drop = price < previous_price
-    history.append(entry)
+    _store.append(f"prices:{product_key}", entry)
+    _store.hset("tracked_products", product_key, product)
     # Check alerts
     triggered_alerts = []
-    for alert in _alerts:
+    all_alerts = _store.list("alerts")
+    for alert in all_alerts:
         if alert["product"] == product_key and price <= alert["target_price"] and alert["active"]:
             triggered_alerts.append({
                 "alert_id": alert["id"],
@@ -63,8 +64,9 @@ def track_price(product: str, price: float, retailer: str = "unknown", currency:
             })
             alert["active"] = False
             alert["triggered_at"] = datetime.now(timezone.utc).isoformat()
+            _store.hset("alerts_by_id", str(alert["id"]), alert)
     # Stats
-    all_prices = [h["price"] for h in history]
+    all_prices = [h["price"] for h in history] + [entry["price"]]
     return json.dumps({
         "product": product,
         "recorded": entry,
@@ -91,9 +93,9 @@ def get_price_history(product: str, limit: int = 20, api_key: str = "") -> str:
         return json.dumps({"error": msg, "upgrade_url": "https://meok.ai/pricing"})
     if err := _rl(): return err
     product_key = product.lower().strip()
-    history = _price_history.get(product_key, [])
+    history = _store.list(f"prices:{product_key}")
     if not history:
-        tracked = list(_price_history.keys())
+        tracked = list(_store.hgetall("tracked_products").keys())
         return json.dumps({
             "error": f"No price history for '{product}'",
             "tracked_products": tracked[:20] if tracked else [],
@@ -136,16 +138,18 @@ def set_alert(product: str, target_price: float, api_key: str = "") -> str:
     product_key = product.lower().strip()
     # Get current price if tracked
     current_price = None
-    if product_key in _price_history and _price_history[product_key]:
-        current_price = _price_history[product_key][-1]["price"]
+    history = _store.list(f"prices:{product_key}")
+    if history:
+        current_price = history[-1]["price"]
         if current_price <= target_price:
             return json.dumps({
                 "message": f"Current price (${current_price}) is already at or below target (${target_price})!",
                 "current_price": current_price,
                 "target_price": target_price,
             })
+    alert_id = _store.list_length("alerts") + 1
     alert = {
-        "id": len(_alerts) + 1,
+        "id": alert_id,
         "product": product_key,
         "product_display": product,
         "target_price": round(target_price, 2),
@@ -154,8 +158,10 @@ def set_alert(product: str, target_price: float, api_key: str = "") -> str:
         "created_at": datetime.now(timezone.utc).isoformat(),
         "triggered_at": None,
     }
-    _alerts.append(alert)
-    active_alerts = [a for a in _alerts if a["active"]]
+    _store.append("alerts", alert)
+    _store.hset("alerts_by_id", str(alert_id), alert)
+    all_alerts = _store.list("alerts")
+    active_alerts = [a for a in all_alerts if a["active"]]
     return json.dumps({
         "alert_created": alert,
         "current_price": current_price,
@@ -178,8 +184,8 @@ def compare_prices(products: str, api_key: str = "") -> str:
     results = []
     for name in names:
         key = name.lower().strip()
-        if key in _price_history and _price_history[key]:
-            history = _price_history[key]
+        history = _store.list(f"prices:{key}")
+        if history:
             all_prices = [h["price"] for h in history]
             current = history[-1]
             results.append({

@@ -1,0 +1,52 @@
+{
+  "name": "price-tracker-ai",
+  "description": "Track product prices over time, set price drop alerts, and compare across retailers. By MEOK AI Labs.",
+  "version": "1.0.0",
+  "protocol_version": "2025-11-25",
+  "publisher": {
+    "name": "MEOK AI Labs",
+    "url": "https://meok.ai",
+    "email": "nicholas@meok.ai"
+  },
+  "repository": "https://github.com/CSOAI-ORG/price-tracker-ai-mcp",
+  "license": "MIT",
+  "transport": [
+    "stdio",
+    "streamable-http"
+  ],
+  "authentication": {
+    "type": "api-key",
+    "free_tier": true,
+    "free_limit": "15 calls/day"
+  },
+  "tools": [
+    {
+      "name": "track_price",
+      "description": "Record a price observation for a product. Tracks history and detects drops automatically."
+    },
+    {
+      "name": "get_price_history",
+      "description": "Get the price history for a tracked product. Returns most recent entries up to limit."
+    },
+    {
+      "name": "set_alert",
+      "description": "Set a price alert. Get notified when a product drops to or below the target price."
+    },
+    {
+      "name": "compare_prices",
+      "description": "Compare current prices across multiple tracked products. Provide comma-separated product names."
+    }
+  ],
+  "categories": [
+    "AI & Machine Learning"
+  ],
+  "pricing": {
+    "free": {
+      "calls_per_day": 15
+    },
+    "pro": {
+      "price": "$29/month",
+      "url": "https://meok.ai/pricing"
+    }
+  }
+}
