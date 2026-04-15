@@ -1,10 +1,48 @@
 name: price-tracker-ai-mcp
-description: MEOK AI Labs MCP Server
+description: Track product prices over time, set price drop alerts, and compare across
+  retailers. By MEOK AI Labs
 version: 1.0.0
 tools:
 - name: track_price
-  description: Track a product price
-  parameters: []
-- name: get_alerts
-  description: Get price drop alerts
-  parameters: []
+  description: Record a price observation for a product. Tracks history and detects
+    drops automatically.
+  parameters:
+  - name: product
+    type: string
+    required: true
+  - name: price
+    type: number
+    required: true
+  - name: retailer
+    type: string
+    required: false
+  - name: currency
+    type: string
+    required: false
+- name: get_price_history
+  description: Get the price history for a tracked product. Returns most recent entries
+    up to limit.
+  parameters:
+  - name: product
+    type: string
+    required: true
+  - name: limit
+    type: integer
+    required: false
+- name: set_alert
+  description: Set a price alert. Get notified when a product drops to or below the
+    target price.
+  parameters:
+  - name: product
+    type: string
+    required: true
+  - name: target_price
+    type: number
+    required: true
+- name: compare_prices
+  description: Compare current prices across multiple tracked products. Provide comma-separated
+    product names.
+  parameters:
+  - name: products
+    type: string
+    required: true

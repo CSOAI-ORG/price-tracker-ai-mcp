@@ -1,24 +1,83 @@
 {
   "name": "price-tracker-ai-mcp",
-  "description": "> **By [MEOK AI Labs](https://meok.ai)** \u2014 MEOK AI Labs MCP Server",
+  "description": "> **By [MEOK AI Labs](https://meok.ai)** \u2014 Track product prices over time, set price drop alerts, and compare across retailers. By MEOK AI Labs",
   "version": "1.0.0",
   "tools": [
     {
       "name": "track_price",
-      "description": "Track a product price",
+      "description": "Record a price observation for a product. Tracks history and detects drops automatically.",
       "parameters": {
         "type": "object",
-        "properties": {},
-        "required": []
+        "properties": {
+          "product": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "retailer": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "product",
+          "price"
+        ]
       }
     },
     {
-      "name": "get_alerts",
-      "description": "Get price drop alerts",
+      "name": "get_price_history",
+      "description": "Get the price history for a tracked product. Returns most recent entries up to limit.",
       "parameters": {
         "type": "object",
-        "properties": {},
-        "required": []
+        "properties": {
+          "product": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "product"
+        ]
+      }
+    },
+    {
+      "name": "set_alert",
+      "description": "Set a price alert. Get notified when a product drops to or below the target price.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "product": {
+            "type": "string"
+          },
+          "target_price": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "product",
+          "target_price"
+        ]
+      }
+    },
+    {
+      "name": "compare_prices",
+      "description": "Compare current prices across multiple tracked products. Provide comma-separated product names.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "products": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "products"
+        ]
       }
     }
   ]
