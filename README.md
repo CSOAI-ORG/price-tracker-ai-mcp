@@ -1,67 +1,38 @@
-# Price Tracker Ai
+<div align="center">
 
-> By [MEOK AI Labs](https://meok.ai) — Track product prices over time, set price drop alerts, and compare across retailers. By MEOK AI Labs.
+[![GitHub stars](https://img.shields.io/github/stars/CSOAI-ORG/price-tracker-ai-mcp)](https://github.com/CSOAI-ORG/price-tracker-ai-mcp/stargazers)
 
-Price Tracker AI — track product prices, monitor drops, set alerts, and compare across retailers. MEOK AI Labs.
+# upriceU trackerU aiU mcp
+
+**Price Tracker AI — track product prices, monitor drops, set alerts, and compare across retailers. MEOK AI Labs.**
+
+[![npm version](https://img.shields.io/npm/v/@meok-ai/price-tracker-ai-mcp)](https://www.npmjs.com/package/@meok-ai/price-tracker-ai-mcp)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![MEOK AI Labs](https://img.shields.io/badge/MEOK_AI_Labs-255+_servers-purple)](https://meok.ai)
+
+[Installation](#installation) · [Docs](https://csoai.org) · [Report Bug](https://github.com/CSOAI-ORG/price-tracker-ai-mcp/issues)
+
+</div>
+
+---
 
 ## Installation
 
 ```bash
 pip install price-tracker-ai-mcp
+# or
+npm install -g @meok-ai/price-tracker-ai-mcp
 ```
 
-## Usage
+## Quick Start
 
-```bash
-# Run standalone
-python server.py
+See the project repository for full documentation and examples.
 
-# Or via MCP
-mcp install price-tracker-ai-mcp
-```
+## Enterprise Support
 
-## Tools
-
-### `track_price`
-Record a price observation for a product. Tracks history and detects drops automatically.
-
-**Parameters:**
-- `product` (str)
-- `price` (float)
-- `retailer` (str)
-- `currency` (str)
-
-### `get_price_history`
-Get the price history for a tracked product. Returns most recent entries up to limit.
-
-**Parameters:**
-- `product` (str)
-- `limit` (int)
-
-### `set_alert`
-Set a price alert. Get notified when a product drops to or below the target price.
-
-**Parameters:**
-- `product` (str)
-- `target_price` (float)
-
-### `compare_prices`
-Compare current prices across multiple tracked products. Provide comma-separated product names.
-
-**Parameters:**
-- `products` (str)
-
-
-## Authentication
-
-Free tier: 15 calls/day. Upgrade at [meok.ai/pricing](https://meok.ai/pricing) for unlimited access.
-
-## Links
-
-- **Website**: [meok.ai](https://meok.ai)
-- **GitHub**: [CSOAI-ORG/price-tracker-ai-mcp](https://github.com/CSOAI-ORG/price-tracker-ai-mcp)
-- **PyPI**: [pypi.org/project/price-tracker-ai-mcp](https://pypi.org/project/price-tracker-ai-mcp/)
+- 📧 nicholas@csoai.org
+- 🌐 [CSOAI.org](https://csoai.org)
 
 ## License
 
-MIT — MEOK AI Labs
+MIT © [CSOAI](https://csoai.org)
