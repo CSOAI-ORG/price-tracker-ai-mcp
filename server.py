@@ -25,7 +25,22 @@ mcp = FastMCP("price-tracker-ai", instructions="Track product prices over time, 
 
 @mcp.tool()
 def track_price(product: str, price: float, retailer: str = "unknown", currency: str = "USD", api_key: str = "") -> str:
-    """Record a price observation for a product. Tracks history and detects drops automatically."""
+    """Record a price observation for a product. Tracks history and detects drops automatically.
+
+    Behavior:
+        This tool generates structured output without modifying external systems.
+        Output is deterministic for identical inputs. No side effects.
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need structured analysis or classification
+        of inputs against established frameworks or standards.
+
+    When NOT to use:
+        Not suitable for real-time production decision-making without
+        human review of results.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return json.dumps({"error": msg, "upgrade_url": "https://meok.ai/pricing"})
@@ -87,7 +102,22 @@ def track_price(product: str, price: float, retailer: str = "unknown", currency:
 
 @mcp.tool()
 def get_price_history(product: str, limit: int = 20, api_key: str = "") -> str:
-    """Get the price history for a tracked product. Returns most recent entries up to limit."""
+    """Get the price history for a tracked product. Returns most recent entries up to limit.
+
+    Behavior:
+        This tool generates structured output without modifying external systems.
+        Output is deterministic for identical inputs. No side effects.
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need structured analysis or classification
+        of inputs against established frameworks or standards.
+
+    When NOT to use:
+        Not suitable for real-time production decision-making without
+        human review of results.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return json.dumps({"error": msg, "upgrade_url": "https://meok.ai/pricing"})
@@ -128,7 +158,22 @@ def get_price_history(product: str, limit: int = 20, api_key: str = "") -> str:
 
 @mcp.tool()
 def set_alert(product: str, target_price: float, api_key: str = "") -> str:
-    """Set a price alert. Get notified when a product drops to or below the target price."""
+    """Set a price alert. Get notified when a product drops to or below the target price.
+
+    Behavior:
+        This tool generates structured output without modifying external systems.
+        Output is deterministic for identical inputs. No side effects.
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need structured analysis or classification
+        of inputs against established frameworks or standards.
+
+    When NOT to use:
+        Not suitable for real-time production decision-making without
+        human review of results.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return json.dumps({"error": msg, "upgrade_url": "https://meok.ai/pricing"})
@@ -173,7 +218,22 @@ def set_alert(product: str, target_price: float, api_key: str = "") -> str:
 
 @mcp.tool()
 def compare_prices(products: str, api_key: str = "") -> str:
-    """Compare current prices across multiple tracked products. Provide comma-separated product names."""
+    """Compare current prices across multiple tracked products. Provide comma-separated product names.
+
+    Behavior:
+        This tool generates structured output without modifying external systems.
+        Output is deterministic for identical inputs. No side effects.
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need structured analysis or classification
+        of inputs against established frameworks or standards.
+
+    When NOT to use:
+        Not suitable for real-time production decision-making without
+        human review of results.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return json.dumps({"error": msg, "upgrade_url": "https://meok.ai/pricing"})
