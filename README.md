@@ -1,3 +1,7 @@
+[![price-tracker-ai-mcp MCP server](https://glama.ai/mcp/servers/CSOAI-ORG/price-tracker-ai-mcp/badges/score.svg)](https://glama.ai/mcp/servers/CSOAI-ORG/price-tracker-ai-mcp)
+[![MCP Registry](https://img.shields.io/badge/MCP_Registry-Published-green)](https://registry.modelcontextprotocol.io)
+[![PyPI](https://img.shields.io/pypi/v/price-tracker-ai-mcp)](https://pypi.org/project/price-tracker-ai-mcp/)
+
 [![price-tracker-ai-mcp MCP server](https://glama.ai/mcp/servers/CSOAI-ORG/price-tracker-ai-mcp/badges/card.svg)](https://glama.ai/mcp/servers/CSOAI-ORG/price-tracker-ai-mcp)
 
 <div align="center">
