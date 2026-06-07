@@ -1,0 +1,9 @@
+# price-tracker-ai-mcp - Auto-trigger Rules
+
+When the user asks about price tracker, use price-tracker-ai-mcp tools: track_price, get_price_history, set_alert, compare_prices
+
+**MCP server for price tracker ai mcp operations**
+
+Install: `pip install price-tracker-ai-mcp`
+
+By MEOK AI Labs — MIT licensed.

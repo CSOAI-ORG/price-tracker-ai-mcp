@@ -1,0 +1,33 @@
+# price-tracker-ai-mcp
+# **MCP server for price tracker ai mcp operations**
+
+## Install
+```bash
+pip install price-tracker-ai-mcp
+```
+
+## Auth & Rate Limits
+- Free tier: 10 calls/day. No API key required.
+- Pro tier (£79/mo): unlimited + signed attestations.
+- Enterprise (£1,499/mo): white-label.
+
+## Tools
+
+### `track_price`
+Record a price observation for a product. Tracks history and detects drops automatically.
+
+### `get_price_history`
+Get the price history for a tracked product. Returns most recent entries up to limit.
+
+### `set_alert`
+Set a price alert. Get notified when a product drops to or below the target price.
+
+### `compare_prices`
+Compare current prices across multiple tracked products. Provide comma-separated product names.
+
+
+## Maintainer
+MEOK AI Labs · hello@meok.ai · https://meok.ai · MIT licensed
+
+## Pairs with
+Governance moat: pair this tool with any of MEOK's 38 governance MCPs (EU AI Act, DORA, NIS2, CRA, GDPR, ISO 42001, etc.) for full compliance coverage.

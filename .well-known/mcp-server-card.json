@@ -1,0 +1,25 @@
+{
+  "name": "price-tracker-ai-mcp",
+  "title": "Price Tracker Ai Mcp",
+  "description": "Price Tracker Ai MCP server. Tools: track price, get price history, set alert. Built by MEOK AI Labs.",
+  "version": "1.0.6",
+  "homepage": "https://meok.ai",
+  "license": "MIT",
+  "transport": {
+    "type": "stdio"
+  },
+  "tools": [
+    {
+      "name": "track_price"
+    },
+    {
+      "name": "get_price_history"
+    },
+    {
+      "name": "set_alert"
+    },
+    {
+      "name": "compare_prices"
+    }
+  ]
+}

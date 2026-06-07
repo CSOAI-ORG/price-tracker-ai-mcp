@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Price Tracker AI — track product prices, monitor drops, set alerts, and compare across retailers. MEOK AI Labs."""
+"""
+Price Tracker AI — track product prices, monitor drops, set alerts, and compare across retailers. MEOK AI Labs."""
 import sys, os
-sys.path.insert(0, os.path.expanduser('~/clawd/meok-labs-engine/shared'))
 from auth_middleware import check_access
 from persistence import ServerStore
 
@@ -65,7 +65,7 @@ def track_price(product: str, price: float, retailer: str = "unknown", currency:
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": "https://meok.ai/pricing"})
+        return json.dumps({"error": msg, "upgrade_url": "https://councilof.ai"})
     if err := _rl(): return err
     if price < 0:
         return json.dumps({"error": "Price cannot be negative"})
@@ -162,7 +162,7 @@ def get_price_history(product: str, limit: int = 20, api_key: str = "") -> str:
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": "https://meok.ai/pricing"})
+        return json.dumps({"error": msg, "upgrade_url": "https://councilof.ai"})
     if err := _rl(): return err
     product_key = product.lower().strip()
     history = _store.list(f"prices:{product_key}")
@@ -238,7 +238,7 @@ def set_alert(product: str, target_price: float, api_key: str = "") -> str:
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": "https://meok.ai/pricing"})
+        return json.dumps({"error": msg, "upgrade_url": "https://councilof.ai"})
     if err := _rl(): return err
     if target_price < 0:
         return json.dumps({"error": "Target price cannot be negative"})
@@ -317,7 +317,7 @@ def compare_prices(products: str, api_key: str = "") -> str:
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": "https://meok.ai/pricing"})
+        return json.dumps({"error": msg, "upgrade_url": "https://councilof.ai"})
     if err := _rl(): return err
     names = [p.strip() for p in products.split(",") if p.strip()]
     if len(names) < 2:
@@ -352,5 +352,8 @@ def compare_prices(products: str, api_key: str = "") -> str:
     }, indent=2)
 
 
-if __name__ == "__main__":
+def main():
     mcp.run()
+
+if __name__ == '__main__':
+    main()
