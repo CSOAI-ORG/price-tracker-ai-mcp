@@ -1,0 +1,22 @@
+{
+  "acpVersion": "0.1",
+  "agent": {
+    "name": "price-tracker-ai-mcp",
+    "description": "Price Tracker Ai MCP Server by MEOK AI Labs",
+    "version": "1.0.6",
+    "provider": "MEOK AI Labs",
+    "interfaces": [
+      {
+        "type": "mcp",
+        "transport": "stdio",
+        "package": "price-tracker-ai-mcp"
+      }
+    ],
+    "capabilities": [
+      "track_price",
+      "get_price_history",
+      "set_alert",
+      "compare_prices"
+    ]
+  }
+}

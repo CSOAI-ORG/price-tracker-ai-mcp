@@ -1,0 +1,59 @@
+{
+  "name": "price-tracker-ai-mcp",
+  "description": "Price Tracker Ai MCP Server by MEOK AI Labs",
+  "url": "https://proofof.ai/scorecard/price-tracker-ai-mcp.html",
+  "version": "1.0.6",
+  "protocolVersion": "0.2.0",
+  "provider": {
+    "organization": "MEOK AI Labs",
+    "url": "https://meok.ai"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text"
+  ],
+  "defaultOutputModes": [
+    "text"
+  ],
+  "skills": [
+    {
+      "id": "track_price",
+      "name": "Track Price",
+      "description": "track_price via price-tracker-ai-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    },
+    {
+      "id": "get_price_history",
+      "name": "Get Price History",
+      "description": "get_price_history via price-tracker-ai-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    },
+    {
+      "id": "set_alert",
+      "name": "Set Alert",
+      "description": "set_alert via price-tracker-ai-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    },
+    {
+      "id": "compare_prices",
+      "name": "Compare Prices",
+      "description": "compare_prices via price-tracker-ai-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    }
+  ]
+}
