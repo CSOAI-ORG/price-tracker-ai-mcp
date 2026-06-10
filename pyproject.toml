@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 [project]
 name = "price-tracker-ai-mcp"
-version = "1.0.6"
+version = "1.0.8"
 readme = "README.md"
 description = "Price Tracker Ai MCP server. Tools: track price, get price history, set alert. Built by MEOK AI Labs."
 license = {file = "LICENSE"}
@@ -22,7 +22,7 @@ Homepage = "https://meok.ai"
 Repository = "https://github.com/CSOAI-ORG/price-tracker-ai-mcp"
 [tool.hatch.build.targets.wheel]
 packages = ["."]
-only-include = ["server.py", "auth_middleware.py"]
+only-include = ["auth_middleware.py", "persistence.py", "server.py"]
 
 [project.scripts]
 price_tracker_ai_mcp = "server:main"
